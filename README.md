@@ -46,6 +46,41 @@ pnpm -r build
 }
 ```
 
+## 命令行快速上手（CLI）
+
+不想写代码？装好依赖后，`@autow/cli` 让你一条命令写出一章——自带 LLM key 即可（BYOK）：
+
+```bash
+pnpm install && pnpm -r build
+
+# 用任意 OpenAI 兼容端点写一章（以 DeepSeek 为例）
+node packages/cli/dist/index.js 《雾港旧事》 \
+  --base-url https://api.deepseek.com/v1 \
+  --api-key sk-xxxxx \
+  --model deepseek-chat \
+  --words 3000 \
+  --out out/chapter-1.md
+```
+
+成稿落到 `out/chapter-1.md`。引擎跑完七阶段流水线（规划 → 写作 → 审稿 → 修订 → 润色 → 校验 → 出版），由质量门禁判定是否返修。
+
+常用参数：
+
+| 参数 | 说明 |
+|---|---|
+| `《书名》` / `--title` | 章节/作品标题 |
+| `--premise` / `--bible <path>` | 作品设定（一句话主题，或详尽设定文件） |
+| `--goal` | 本章目标/节拍 |
+| `--words` | 目标字数（默认 3000） |
+| `--model` | 强模型（规划/写作/审稿/修订/判官）**必填** |
+| `--fast-model` | 快模型（润色，缺省回落到 `--model`） |
+| `--base-url` / `--api-key` | OpenAI 兼容端点 + key（BYOK） |
+| `--platform` | 额外渲染成平台 HTML：`wechat` / `zhihu` / `xiaohongshu` / `x` / `newsletter` |
+| `--quality-threshold` | 过线分 0-100（默认 80） |
+| `--max-revise-rounds` | 返修上限（默认 1） |
+
+配置优先级：命令行 `>` 环境变量（`AUTOW_LLM_*`）`>` `autow.config.json` `>` 内置默认。完整参数见 `autow --help`。
+
 ## 用法示例
 
 下面的示例只使用 `packages/core/src/index.ts` 和 `packages/engine/src/index.ts` 已真实导出的 API。

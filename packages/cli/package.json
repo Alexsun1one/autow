@@ -1,0 +1,50 @@
+{
+  "name": "@autow/cli",
+  "version": "0.1.0",
+  "description": "卷舍写作引擎命令行 —— clone 后即可命令行写一章（基于 @autow/core + @autow/engine）。",
+  "keywords": [
+    "ai-novel-writing",
+    "ai-writing-agent",
+    "cli",
+    "novel-generator",
+    "multi-agent-pipeline",
+    "byok"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "autow": "dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.81",
+    "@ai-sdk/openai-compatible": "^2.0.48",
+    "@autow/core": "workspace:*",
+    "@autow/engine": "workspace:*",
+    "ai": "^6.0.159",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
